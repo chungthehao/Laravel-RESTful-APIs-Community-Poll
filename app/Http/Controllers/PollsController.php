@@ -16,4 +16,10 @@ class PollsController extends Controller
     {
         return response()->json(Poll::find($id), 200);
     }
+
+    public function store(Request $request)
+    {
+        $poll = Poll::create($request->post());
+        return response()->json($poll, 201);
+    }
 }
