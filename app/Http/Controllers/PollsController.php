@@ -63,4 +63,9 @@ class PollsController extends Controller
             'errorMsg' => 'Payment is required.'
         ], 501); // Error code: Not Implemented
     }
+
+    public function questions(Poll $poll)
+    {
+        return response()->json($poll->questions, 200);
+    }
 }
