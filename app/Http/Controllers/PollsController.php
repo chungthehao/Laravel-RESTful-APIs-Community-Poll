@@ -14,7 +14,16 @@ class PollsController extends Controller
 
     public function show($id)
     {
-        return response()->json(Poll::find($id), 200);
+        // * Tự custom sẽ trả về gì nếu ko tìm thấy
+        $poll = Poll::find($id);
+        if (is_null($poll)) return response()->json(null, 404);
+        return response()->json($poll, 200);
+
+        // * Trả về html 404
+        //return response()->json(Poll::findOrFail($id), 200);
+
+        // * Trả về {} 200 nếu ko tìm thấy -> chưa tốt
+        //return response()->json(Poll::find($id), 200);
     }
 
     public function store(Request $request)
