@@ -52,4 +52,11 @@ class PollsController extends Controller
         $poll->delete();
         return response()->json(null, 204); // 204: no content (remove successfully)
     }
+
+    public function errors()
+    {
+        return response()->json([
+            'errorMsg' => 'Payment is required.'
+        ], 501); // Error code: Not Implemented
+    }
 }
