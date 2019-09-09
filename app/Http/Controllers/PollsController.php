@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Poll;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\Poll as PollResource;
 
 class PollsController extends Controller
 {
@@ -18,7 +19,10 @@ class PollsController extends Controller
         // * Tự custom sẽ trả về gì nếu ko tìm thấy
         $poll = Poll::find($id);
         if (is_null($poll)) return response()->json(null, 404);
-        return response()->json($poll, 200);
+
+        $pollResource = new PollResource($poll);
+
+        return response()->json($pollResource, 200);
 
         // * Trả về html 404
         //return response()->json(Poll::findOrFail($id), 200);
