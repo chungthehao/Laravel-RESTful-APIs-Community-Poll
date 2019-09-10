@@ -17,7 +17,7 @@ class PollsController extends Controller
     public function show($id)
     {
         // * Tự custom sẽ trả về gì nếu ko tìm thấy
-        $poll = Poll::find($id);
+        $poll = Poll::with('questions')->find($id);
         if (is_null($poll)) return response()->json(null, 404);
 
         $pollResource = new PollResource($poll);
