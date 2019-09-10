@@ -15,7 +15,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        return response()->json(Question::all(), 200);
+        return response()->json(Question::paginate(2), 200);
     }
 
     /**
