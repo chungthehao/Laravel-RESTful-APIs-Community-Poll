@@ -16,13 +16,16 @@ class PollsController extends Controller
 
     public function show($id)
     {
+        $poll = Poll::findOrFail($id);
+        $response['poll'] = $poll;
+        $response['questions'] = $poll->questions;
+        return response()->json($response, 200);
+
         // * Tự custom sẽ trả về gì nếu ko tìm thấy
-        $poll = Poll::with('questions')->find($id);
-        if (is_null($poll)) return response()->json(null, 404);
-
-        $pollResource = new PollResource($poll);
-
-        return response()->json($pollResource, 200);
+//        $poll = Poll::with('questions')->find($id);
+//        if (is_null($poll)) return response()->json(null, 404);
+//        $pollResource = new PollResource($poll);
+//        return response()->json($pollResource, 200);
 
         // * Trả về html 404
         //return response()->json(Poll::findOrFail($id), 200);
