@@ -81,4 +81,19 @@ class FeatureContext implements Context
         return $count == $arg1;
     }
 
+    /**
+     * @Then the response contains a title of :arg1
+     */
+    public function theResponseContainsATitleOf($arg1)
+    {
+        $data = json_decode($this->responseBody);
+
+        if ($data->title == $arg1) {
+
+        } else {
+            throw new Exception("The title does not match.\n" . $this->responseBody);
+        }
+    }
+
+
 }
